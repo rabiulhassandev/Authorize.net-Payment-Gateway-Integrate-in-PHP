@@ -9,54 +9,17 @@ if(isset($_GET['m']))
 <!doctype html>
 <html lang="en">
   <head>
-
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Check Out</title>
 
-<style>
-body {
-  font-family: Arial Narrow, sans-serif;
-}
-.content-wrapper {
-  width: 400px;
-  margin-left: auto;
-  margin-right:auto;
-  padding: 10px;
-  border: 1px solid #000;
-}
-.form-content {
-  padding: 5px;
-}
-input {
-  width: 95%;
-  padding: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-label {
-  font-size: 20px;
-}
-h1 {
-  font-size: 24px;
-  text-align: center;
-}
-.select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-.submit {
-  width: 100%;
-  font-size: 23px;
-  background: #000;
-  color: #fff;
-  cursor: pointer;
-  padding: 5px;
-}
-.message {
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <title>Checkout</title>
+
+  <style>
+    .message {
   text-align: center;
   font-size: 33px;
   margin-top: 5%;
@@ -69,12 +32,12 @@ h1 {
 .error-link a {
   text-decoration: none;
 }
-</style>
+  </style>
 
   </head>
   <body>
 
-<?php
+  <?php
 if (isset($m)) {
 
   if ($m==1) {
@@ -90,127 +53,210 @@ if (isset($m)) {
 }  else {
 ?>
 
-<div class="content-wrapper">
-  <h1>Billing Information</h1>
-  <form action="payment.php" method="POST" autocomplete="off">
-    <div class="form-content">
+    <div class="container">
+      <div class="py-5 text-center">
+        <h1><b>CHECKOUT</b></h1>
+      </div>
 
-      <label>Amount</label>
-      <input type="text" name="amount" value="98.61"/>
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Product name</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$12</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Second product</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$8</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Third item</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">-$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>$20</strong>
+            </li>
+          </ul>
 
-      <label>Your Full Name</label>
-      <input type="text" name="name" value="John Smith"/>
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Redeem</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Billing Info</h4>
+          <form  action="payment.php" method="POST">
 
-      <label>Your Email Address</label>
-      <input type="text" name="email" value="johns99@email.com"/>
+            <input type="hidden" value="20" name="amount" required readonly>
 
-      <label>Street Address</label>
-      <input type="text" name="street" value="1841 Wilbor Avenue"/>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" value="Rabiul" required="">
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name"  value="Hassan" required="">
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+            </div>
 
-      <label>City</label>
-      <input type="text" name="city" value="North Port"/>
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="johns99@email.com" required>
+            </div>
 
-      <label>State</label>
-      <select class="select" name="state">
-      	<option value="AL">Alabama</option>
-      	<option value="AK">Alaska</option>
-      	<option value="AZ">Arizona</option>
-      	<option value="AR">Arkansas</option>
-      	<option value="CA">California</option>
-      	<option value="CO">Colorado</option>
-      	<option value="CT">Connecticut</option>
-      	<option value="DE">Delaware</option>
-      	<option value="DC">District Of Columbia</option>
-      	<option value="FL">Florida</option>
-      	<option value="GA">Georgia</option>
-      	<option value="HI">Hawaii</option>
-      	<option value="ID">Idaho</option>
-      	<option value="IL">Illinois</option>
-      	<option value="IN">Indiana</option>
-      	<option value="IA">Iowa</option>
-      	<option value="KS">Kansas</option>
-      	<option value="KY">Kentucky</option>
-      	<option value="LA">Louisiana</option>
-      	<option value="ME">Maine</option>
-      	<option value="MD">Maryland</option>
-      	<option value="MA">Massachusetts</option>
-      	<option value="MI">Michigan</option>
-      	<option value="MN">Minnesota</option>
-      	<option value="MS">Mississippi</option>
-      	<option value="MO">Missouri</option>
-      	<option value="MT">Montana</option>
-      	<option value="NE">Nebraska</option>
-      	<option value="NV">Nevada</option>
-      	<option value="NH">New Hampshire</option>
-      	<option value="NJ">New Jersey</option>
-      	<option value="NM">New Mexico</option>
-      	<option value="NY">New York</option>
-      	<option value="NC">North Carolina</option>
-      	<option value="ND">North Dakota</option>
-      	<option value="OH">Ohio</option>
-      	<option value="OK">Oklahoma</option>
-      	<option value="OR">Oregon</option>
-      	<option value="PA">Pennsylvania</option>
-      	<option value="RI">Rhode Island</option>
-      	<option value="SC">South Carolina</option>
-      	<option value="SD">South Dakota</option>
-      	<option value="TN">Tennessee</option>
-      	<option value="TX" selected>Texas</option>
-      	<option value="UT">Utah</option>
-      	<option value="VT">Vermont</option>
-      	<option value="VA">Virginia</option>
-      	<option value="WA">Washington</option>
-      	<option value="WV">West Virginia</option>
-      	<option value="WI">Wisconsin</option>
-      	<option value="WY">Wyoming</option>
-      </select>
+            <div class="mb-3">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" value="1841 Wilbor Avenue" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
 
+            <div class="mb-3">
+              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment or suite">
+            </div>
 
-      <label>Zip Code</label>
-      <input type="text" name="zip" value="75001"/>
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="North Port" value="North Port" required="">
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="state">State</label>
+                <select class="custom-select d-block w-100" id="state" name="state" required="">
+                  <option value="">Choose...</option>
+                  <option selected>California</option>
+                  <option>New York</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Enter zip code" value="75001" required="">
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="same-address">
+              <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="save-info">
+              <label class="custom-control-label" for="save-info">Save this information for next time</label>
+            </div>
+            <hr class="mb-4">
 
-      <h1>Credit Card Info</h1>
+            <h4 class="mb-3">Payment</h4>
 
-      <label>Card Number</label>
-      <input type="text" name="card" value="4111111111111111"/>
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                <label class="custom-control-label" for="credit">Credit card</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="debit">Debit card</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Name on card</label>
+                <input type="text" class="form-control" id="cc-name" name="cc-name" value="Rabiul Hassan" placeholder="Name on card" required="">
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Credit card number</label>
+                <input type="text" class="form-control" id="cc-number" name="cc-number" value="4111111111111111" placeholder="Credit card number" required="">
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration</label>
+                <input type="text" class="form-control" id="cc-expiration" name="cc-expiration" value="2023-09" placeholder="yyyy-mm" required="">
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="CVV" value="186" required="">
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+          </form>
+        </div>
+      </div>
 
-      <label>Expiration Month</label>
-      <select name="card_exp_month"class="select">
-        <option value="01">01 Jan</option>
-        <option value="02">02 Feb</option>
-        <option value="03">03 Mar</option>
-        <option value="04">04 Apr</option>
-        <option value="05">05 May</option>
-        <option value="06">06 Jun</option>
-        <option value="07">07 Jul</option>
-        <option value="08">08 Aug</option>
-        <option value="09">09 Sep</option>
-        <option value="10">10 Oct</option>
-        <option value="11">11 Nov</option>
-        <option value="12" selected>12 Dec</option>
-      </select>
-
-      <label>Expiration Year</label>
-      <select name="card_exp_year" class="select">
-      <?php
-      echo $firstYear = (int)date('Y');
-      $lastYear = $firstYear + 10;
-      for($i=$firstYear;$i<=$lastYear;$i++)
-      {
-          echo '<option value='.$i.'>'.$i.'</option>';
-      }
-      ?>
-    </select>
-
-    <label>CVV</label>
-    <input type="text" name="cvv" value="186"/>
-
-    <input type="submit" name="submit" class="submit" value="PAY NOW">
-
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017-2018 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
     </div>
-  </form>
-</div>
-<?php }?>
 
+
+    
+<?php }?>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

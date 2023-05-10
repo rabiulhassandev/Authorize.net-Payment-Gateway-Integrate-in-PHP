@@ -7,17 +7,23 @@ use net\authorize\api\controller as AnetController;
 // ***************************************************************************
 // grab our payment data first
 $amount = $_POST['amount'];
-$name = $_POST['name'];
-$street = $_POST['street'];
+$name = $_POST['firstName'] . $_POST['lastName'];
+$address = $_POST['address'];
 $city = $_POST['city'];
 $state = $_POST['state'];
 $zip = $_POST['zip'];
-$card = $_POST['card'];
-$card_exp_month = $_POST['card_exp_month'];
-$card_exp_year = $_POST['card_exp_year'];
-$ex_date = $card_exp_year.'-'.$card_exp_month;
+$card = $_POST['cc-number'];
+// $card_exp_month = $_POST['card_exp_month'];
+// $card_exp_year = $_POST['card_exp_year'];
+// $ex_date = $card_exp_year.'-'.$card_exp_month;
+$ex_date = $_POST['cc-expiration'];
 $cvv = $_POST['cvv'];
 $email = $_POST['email'];
+
+
+
+
+
 // ***************************************************************************
 // ***************************************************************************
 
@@ -25,8 +31,8 @@ define("AUTHORIZENET_LOG_FILE","phplog");
 
 // Common setup for API credentials
   $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-  $merchantAuthentication->setName("Your Api Login ID");
-  $merchantAuthentication->setTransactionKey("Your Transaction Key");
+  $merchantAuthentication->setName("loginId"); // Set your login id here
+  $merchantAuthentication->setTransactionKey("TransactionKey");   // Set your Transaction Key here
   $refId = 'ref' . time();
 
   // ***************************************************************************
@@ -51,7 +57,7 @@ define("AUTHORIZENET_LOG_FILE","phplog");
     		// Set the customer's Bill To address add this section in
     	 $customerAddress = new AnetAPI\CustomerAddressType();
     	 $customerAddress->setFirstName($name);
-    	 $customerAddress->setAddress($street);
+    	 $customerAddress->setAddress($address);
     	 $customerAddress->setCity($city);
     	 $customerAddress->setState($state);
     	 $customerAddress->setZip($zip);
@@ -75,9 +81,12 @@ define("AUTHORIZENET_LOG_FILE","phplog");
     // ***************************************************************************
     // ***************************************************************************
 
+  
+
 if ($response != null)
 {
   $tresponse = $response->getTransactionResponse();
+
   if (($tresponse != null) && ($tresponse->getResponseCode()=="1"))
   {
     header("Location: ./?m=1");
